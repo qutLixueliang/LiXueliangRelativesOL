@@ -1,0 +1,88 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+
+
+
+<!-- layui css -->
+	<link rel="stylesheet" href="./admin/layui/css/layui.css" media="all">
+	<script type="text/javascript" src="./admin/js/jquery-1.11.0.min.js"></script> 
+	<!-- layui js -->
+	<script src="./admin/layui/layui.js"></script>
+	<script type="text/javascript">
+	//单个删除
+	function del(id,mid,iscid){
+		if(confirm("您确定要删除吗?")){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	</script>
+	<script type="text/javascript">
+	//静态表格
+    layui.use('table',function(){
+    	var table = layui.table;
+		//转换静态表格
+		table.init('mylist', {
+		  height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
+		  ,count: 50 //数据总数 服务端获得
+		  ,limit: 5 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+		  ,page:true //开启分页
+		  ,toolbar: '#toolbarDemo'//工具栏
+		  ,defaultToolbar:['filter', 'exports'] 
+		  ,limits:[ 5, 10, 15, 20, 30, 50]//分页显示每页条目下拉选择
+		  ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+		}); 
+	}); 
+
+</script>
+ 
+			<jsp:include page="top.jsp"></jsp:include>
+			 <h3 style="  margin-top: 61px;"><a href="addBbs.jsp" style="    margin-left: 200px;    margin-top: 61px;">添加留言</a></h3>
+			
+       <table class="layui-table" lay-filter="mylist" lay-size="lg" >
+		<thead>
+			<tr>
+				<th lay-data="{field:'xh', align:'center',width:160}">序号</th>
+				<th lay-data="{field:'yx', align:'center',width:160}">名称</th>
+				<th lay-data="{field:'time',align:'center', minWidth:170}">留言内容</th>
+			    <th lay-data="{field:'www',align:'center',minWidth:260}">留言时间</th>
+                <th lay-data="{field:'hf',align:'center', minWidth:170}">回复内容</th>
+				<th lay-data="{field:'addr2',align:'center',minWidth:100}">操作</th> 
+			</tr> 
+		</thead>
+		<tbody style="height: 250px;">
+		 <c:forEach items="${list }" var="u"  varStatus="num">
+		 <tr>
+				<!-- <td></td> -->
+				<td>${num.count }</td>
+				<td>${u.name }</td>
+				<%-- <td>
+				<c:forEach items="${nlist }" var="n">
+				<c:if test="${n.id==u.gid }">
+				<a href="showNewx_sp.do?id=${n.id }">${n.name }</a></c:if>
+				</c:forEach></td> --%>
+				<%-- <td>
+				<c:forEach items="${ualist }" var="n">
+				<c:if test="${n.id==u.hid }">
+				<a href="showUserx.do?id=${n.id }">${n.tname }</a></c:if>
+				</c:forEach></td> --%>
+				
+				<td>${u.note }</td>
+	          	<td>${u.pubtime }</td>
+	          	<td>${u.note2 }</td>
+			  <td><a class="layui-btn layui-btn-danger layui-btn-xs color2"  onclick="return del(1,1,1)" href="deleteBbs.do?id=${u.id }" >删除</a>
+			  </td>
+			</tr>
+        </c:forEach> 
+		</tbody>  
+	</table>
+       
+			<jsp:include page="foot.jsp"></jsp:include>
+	

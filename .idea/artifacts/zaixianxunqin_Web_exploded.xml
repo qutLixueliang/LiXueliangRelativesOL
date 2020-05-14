@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="zaixianxunqin:Web exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/zaixianxunqin_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="zaixianxunqin/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="zaixianxunqin" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="jstl-impl.jar" module-name="zaixianxunqin" />
+          <element id="library" level="module" name="javax.servlet.jsp.jstl.jar" module-name="zaixianxunqin" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
